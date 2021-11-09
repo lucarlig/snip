@@ -11,20 +11,13 @@ pub mod snip {
         Ok(())
     }
 
-    pub fn add_snip(ctx: Context<AddSnips>, code: String, lang_string: String) -> ProgramResult {
+    pub fn add_snip(ctx: Context<AddSnips>, code: String, lang: Language) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
-
-        let lang_enum = match &lang_string[..] {
-            "Rust" => Language::Rust,
-            "Go" => Language::Go,
-            "Text" => Language::Text,
-            _ => Language::Unknown,
-        };
 
         // Build the struct.
         let item = SnipStruct {
-            code: code.to_string(),
-            lang: lang_enum,
+            code,
+            lang,
             user_address: *base_account.to_account_info().key,
         };
 

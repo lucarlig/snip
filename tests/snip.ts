@@ -35,7 +35,7 @@ describe("snip", () => {
 
   it("Is updated!", async () => {
     let inputCode = "let x = 1;";
-    let inputLang = "Rust";
+    let inputLang = { rust: {} };
 
     await program.rpc.addSnip(inputCode, inputLang, {
       accounts: {
