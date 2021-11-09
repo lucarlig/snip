@@ -47,12 +47,13 @@ describe("snip", () => {
       baseAccount.publicKey
     );
 
-    assert.deepEqual(account.totalSnips.toString(), "1");
     let objInput = {
       code: inputCode,
       lang: { rust: {} },
       userAddress: baseAccount.publicKey,
     };
+
+    assert.deepEqual(account.totalSnips.toString(), "1");
     assert.deepEqual(account.snipsList, [objInput]);
   });
 });

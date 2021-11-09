@@ -60,6 +60,17 @@ pub struct SnipStruct {
 pub enum Language {
     Rust,
     Go,
+    Javascript,
+    Php,
+    Java,
+    Matlab,
+    Python,
+    Cpp,
+    C,
+    Kotlin,
+    R,
+    Markdown,
+    Sql,
     Text,
     Unknown,
 }
