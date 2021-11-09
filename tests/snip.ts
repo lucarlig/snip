@@ -13,7 +13,6 @@ describe("snip", () => {
   const baseAccount = anchor.web3.Keypair.generate();
 
   it("Is initialized!", async () => {
-    // Add your test here.
     let tx = await program.rpc.initialize({
       accounts: {
         baseAccount: baseAccount.publicKey,
@@ -32,5 +31,28 @@ describe("snip", () => {
     // Check that values are initialized
     assert.deepEqual(account.totalSnips.toString(), "0");
     assert.deepEqual(account.snipsList, []);
+  });
+
+  it("Is updated!", async () => {
+    let inputCode = "let x = 1;";
+    let inputLang = "Rust";
+
+    await program.rpc.addSnip(inputCode, inputLang, {
+      accounts: {
+        baseAccount: baseAccount.publicKey,
+      },
+    });
+    // Get the account.
+    const account = await program.account.baseAccount.fetch(
+      baseAccount.publicKey
+    );
+
+    assert.deepEqual(account.totalSnips.toString(), "1");
+    let objInput = {
+      code: inputCode,
+      lang: { rust: {} },
+      userAddress: baseAccount.publicKey,
+    };
+    assert.deepEqual(account.snipsList, [objInput]);
   });
 });
